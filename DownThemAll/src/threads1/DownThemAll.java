@@ -1,3 +1,5 @@
+package threads1;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,10 +9,18 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import threads1.Runner;
+import threads2.Runner2;
+
 public class DownThemAll {
+
+	Stack<String> urls;
 
 	public DownThemAll() {
 
@@ -35,38 +45,43 @@ public class DownThemAll {
 			Pattern pattern = Pattern.compile("href=" + "\"" + "(.*?)" + "\"");
 			Matcher matcher = pattern.matcher(sb.toString());
 
+			// Runner runner;
+
+			urls = new Stack<String>();
+
 			while (matcher.find()) {
 				if (matcher.group(1).endsWith(".pdf")) {
-					download(matcher.group(1));
+
+					urls.push(matcher.group(1));
+
+					// runner = new Runner(matcher.group(1));
+					// runner.run();
 				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	public void download(String urlString) {
-		try {
-			String fileName = urlString.substring(
-					urlString.lastIndexOf('/') + 1, urlString.lastIndexOf('.'));
-			URL url = new URL(urlString);
-			InputStream in = url.openStream();
-			FileOutputStream fos = new FileOutputStream(new File(fileName));
+			ExecutorService service = Executors.newFixedThreadPool(5);
 
-			System.out.println("reading file: " + fileName);
-			int length = -1;
-			byte[] buffer = new byte[1024];
-
-			while ((length = in.read(buffer)) > -1) {
-				fos.write(buffer, 0, length);
+			for (int i = 0; i < 10; i++) {
+				Runner runner = new Runner(this);
+				service.execute(runner);
 			}
 
-			fos.close();
-			in.close();
-			System.out.println(fileName + " was downloaded");
+			service.shutdown();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	public String popUrl() {
+		return urls.pop();
+	}
+
+	public boolean stackEmpty() {
+		if (urls.empty()) {
+			return true;
+		}
+		return false;
+	}
+
 }
