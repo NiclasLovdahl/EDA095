@@ -4,16 +4,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Stack;
 
 
-
-public class Runner3 implements Runnable {
+public class Runner implements Runnable {
 
 	DownThemAll dta;
 
-	public Runner3(DownThemAll dta) {
+	public Runner(DownThemAll dta) {
 		this.dta = dta;
 	}
 

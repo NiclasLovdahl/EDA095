@@ -1,20 +1,16 @@
 package threads2;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-import threads2.Runner2;
+import threads2.Runner;
 
 public class DownThemAll {
 
@@ -57,8 +53,8 @@ public class DownThemAll {
 				}
 			}
 
-			Runner2 runner2 = new Runner2(this);
-			Runner2 runner3 = new Runner2(this);
+			Runner runner2 = new Runner(this);
+			Runner runner3 = new Runner(this);
 			runner2.start();
 			runner3.start();
 
