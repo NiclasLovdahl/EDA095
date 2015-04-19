@@ -52,7 +52,7 @@ public class DownThemAll {
 				}
 			}
 
-			ExecutorService service = Executors.newFixedThreadPool(5);
+			ExecutorService service = Executors.newFixedThreadPool(10);
 
 			for (int i = 0; i < 10; i++) {
 				Runner runner = new Runner(this);

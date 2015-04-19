@@ -55,8 +55,16 @@ public class DownThemAll {
 
 			Runner runner2 = new Runner(this);
 			Runner runner3 = new Runner(this);
+			Runner runner4 = new Runner(this);
+			Runner runner5 = new Runner(this);
+			Runner runner6 = new Runner(this);
+			Runner runner7 = new Runner(this);
 			runner2.start();
 			runner3.start();
+			runner4.start();
+			runner5.start();
+			runner6.start();
+			runner7.start();
 
 		} catch (Exception e) {
 			e.printStackTrace();
