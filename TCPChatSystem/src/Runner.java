@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class Runner extends Thread {
 
@@ -24,7 +25,8 @@ public class Runner extends Thread {
 				String s = "";
 
 				while ((length = is.read(buffer)) > -1) {
-					s = new String(buffer, "UTF-8");
+					byte[] messageArray = Arrays.copyOfRange(buffer, 0, length);
+					s = new String(messageArray, "UTF-8");
 
 					String command = s.substring(0, 3);
 

@@ -1,6 +1,6 @@
-package ChatClient;
 
 import java.io.InputStream;
+import java.util.Arrays;
 
 public class InputThread extends Thread {
 
@@ -18,13 +18,19 @@ public class InputThread extends Thread {
 			try {
 				while ((length = is.read(buffer)) > -1) {
 					s = new String(buffer, "UTF-8");
+					if (s.equals("Q")) {
+						break;
+					}
 					System.out.println("\n" + "Recieved message: " + s);
 					System.out.println("Command: ");
+					Arrays.fill(buffer, (byte) 0);
 					s = "";
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+				break;
 			}
 		}
+		System.exit(1);
 	}
 }

@@ -1,4 +1,4 @@
-package ChatClient;
+
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -19,10 +19,11 @@ public class OutputThread extends Thread {
 			try {
 				os.write(scan.nextLine().getBytes());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				break;
 			}
 		}
+		System.exit(1);
 	}
 
 }
