@@ -1,4 +1,3 @@
-
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
@@ -17,13 +16,13 @@ public class ChatClient {
 		try {
 			socket = new Socket(args[0], port);
 			is = socket.getInputStream();
-			os = socket.getOutputStream();
+			
 		} catch (IOException e) {
 			System.out.println(e);
 			System.exit(1);
 		}
 		InputThread it = new InputThread(is);
-		OutputThread ot = new OutputThread(os);
+		OutputThread ot = new OutputThread(socket);
 		it.start();
 		ot.start();
 	}

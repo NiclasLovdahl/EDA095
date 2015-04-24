@@ -37,7 +37,7 @@ public class Runner extends Thread {
 					} else if (command.charAt(0) == 'Q') {
 						participants.removeSocket(socket);
 						socket.close();
-						break;
+						return;
 					} else {
 						os.write("Unknown command. \n".getBytes());
 					}

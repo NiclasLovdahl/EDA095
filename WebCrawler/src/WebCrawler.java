@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class WebCrawler {
 	LinkedList<String> remainingURLs = new LinkedList<String>();
@@ -48,7 +49,6 @@ public class WebCrawler {
 
 	public synchronized boolean terminate() {
 		if (list2.size() >= 500) {
-			printStats();
 			return true;
 		} else {
 			return false;
@@ -97,5 +97,12 @@ public class WebCrawler {
 		wc.queueURL(url.toString());
 
 		service.shutdown();
+		try {
+			service.awaitTermination(1, TimeUnit.DAYS);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		wc.printStats();
 	}
 }

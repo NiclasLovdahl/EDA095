@@ -19,7 +19,7 @@ public class InputThread extends Thread {
 				while ((length = is.read(buffer)) > -1) {
 					s = new String(buffer, "UTF-8");
 					if (s.equals("Q")) {
-						break;
+						return;
 					}
 					System.out.println("\n" + "Recieved message: " + s);
 					System.out.println("Command: ");
@@ -31,6 +31,5 @@ public class InputThread extends Thread {
 				break;
 			}
 		}
-		System.exit(1);
 	}
 }
