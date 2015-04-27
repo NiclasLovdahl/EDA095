@@ -38,7 +38,7 @@ public class SendUDP {
 			System.exit(1);
 		}
 
-		byte[] data2 = new byte[65507]; // We are conservative...
+		byte[] data2 = new byte[65507];
 		DatagramPacket dp2 = new DatagramPacket(data2, data2.length);
 
 		try {

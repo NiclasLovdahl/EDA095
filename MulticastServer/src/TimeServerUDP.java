@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.io.*;
 
-public class TimeServerUDP {
+public class TimeServerUDP extends Thread {
 
 	int port;
 
@@ -21,7 +21,7 @@ public class TimeServerUDP {
 			System.exit(1);
 		}
 
-		byte[] data = new byte[65507]; // We are conservative...
+		byte[] data = new byte[65507];
 		DatagramPacket dp = new DatagramPacket(data, data.length);
 
 		while (true) {
@@ -54,7 +54,7 @@ public class TimeServerUDP {
 				dateString = "Invalid command.";
 			}
 
-			byte[] data2 = new byte[65507]; // We are conservative...
+			byte[] data2 = new byte[65507];
 			data2 = dateString.getBytes();
 			DatagramPacket dp2 = new DatagramPacket(data2, data2.length,
 					dp.getAddress(), dp.getPort());
@@ -65,7 +65,7 @@ public class TimeServerUDP {
 				e.printStackTrace();
 			}
 		}
-		// socket.close();
+//		 socket.close();
 	}
 
 	public static void main(String[] args) {
